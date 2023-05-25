@@ -13,7 +13,7 @@ def update_product_stock(sender, instance, created, **kwargs):
         to_update_stocks = []
         for obj in sale_details:
             stock = Stock.objects.get(id=int(obj["id"]))
-            stock.quantity = stock.quantity-obj['saleQuantity']
+            stock.quantity = stock.quantity-int(obj['saleQuantity'])
             to_update_stocks.append(stock)
         Stock.objects.bulk_update(to_update_stocks, ['quantity'])
 
