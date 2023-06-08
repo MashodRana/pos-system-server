@@ -13,6 +13,8 @@ class Purchase(TimeStamp):
     total = models.FloatField()
     paid_amount = models.FloatField()
     due_amount = models.FloatField()
+    purchase_details = models.TextField()
+    purchase_date = models.DateField()
 
     def __str__(self):
         return f"bill-{self.bill_no}"

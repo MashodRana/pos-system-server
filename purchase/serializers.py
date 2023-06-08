@@ -4,7 +4,7 @@ from purchase.models import Purchase, PurchasedProduct
 
 
 class PurchaseSerializer(serializers.ModelSerializer):
-    supplier = serializers.CharField(source='supplier.name', required=False)
+    supplier_name = serializers.CharField(source='supplier.name', required=False)
 
     class Meta:
         model = Purchase
