@@ -17,16 +17,8 @@ class PurchaseView(APIView):
     def post(self, request, format=None):
         serializer = PurchaseSerializer(data=request.data)
         if serializer.is_valid():
-            purchase = serializer.save()
-            for i, product in enumerate(request.data['products']):
-                request.data['products'][i]['bill_no'] = purchase.bill_no
-
-            serializer = PurchasedProductSerializer(data=request.data['products'], many=True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=HTTP_201_CREATED)
-            else:
-                purchase.delete()
+            serializer.save()
+            return Response(serializer.data, status=HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
