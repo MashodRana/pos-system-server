@@ -26,11 +26,11 @@ class PurchaseDetailView(APIView):
     def get(self, request, pk, format=None):
         purchase = get_object_or_404(Purchase, pk=pk)
         serializer = PurchaseSerializer(purchase)
-        products = purchase.get_purchased_products()
-        serializer2 = PurchasedProductSerializer(products, many=True)
-        data = serializer.data
-        data['products'] = serializer2.data
-        return Response(data)
+        # products = purchase.get_purchased_products()
+        # serializer2 = PurchasedProductSerializer(products, many=True)
+        # data = serializer.data
+        # data['products'] = serializer2.data
+        return Response(serializer.data)
 
     def delete(self, request, pk, format=None):
         purchase = get_object_or_404(Purchase, pk=pk)
