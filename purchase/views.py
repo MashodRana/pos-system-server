@@ -37,6 +37,13 @@ class PurchaseDetailView(APIView):
         purchase.delete()
         return Response(status=HTTP_204_NO_CONTENT)
 
+    def put(self, request, pk, format=None):
+        purchase = get_object_or_404(Purchase, bill_no=pk)
+        serializer = PurchaseSerializer(purchase, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
 class PurchasedProductsView(APIView):
